@@ -2,7 +2,6 @@
 
 # The specific package name used to install neovim
 neovim_name: neovim
-neovim_ppa: ppa:neovim-ppa/unstable
 
 # The base directory relative to which user specific configuration files should be stored
 config_dir: "{{ ansible_env.XDG_CONFIG_HOME | default(default_xdg_config_home) }}"
@@ -27,8 +26,10 @@ python_required_packages:
     - python-pip
     - python3-dev
     - python3-pip
+    - pylint3
+    - pylint
 
-# you complete me 
-ycm_packages:
-    - build-essential
-    - cmake
+# profile stuff
+init_path: /home/$USER/.config/nvim/
+env_lines: "MYVIMRC='{{ init_path }}init.vim'\nVIMINIT='source $MYVIMRC'"
+bashrc_env: 'PATH="$PATH:/home/$USER/.local/bin"'

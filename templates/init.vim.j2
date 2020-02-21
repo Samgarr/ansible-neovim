@@ -1,0 +1,74 @@
+"some basic stuf
+syntax enable
+set background=dark
+set expandtab
+set tabstop=2
+set shiftwidth=2
+set noshowmode
+set nocompatible              " be iMproved
+filetype off                  " required!
+set encoding=utf-8
+set foldmethod=indent
+set foldnestmax=2
+set foldlevelstart=20
+nnoremap <space> za
+vnoremap <space> zf
+set number
+
+call plug#begin('~/.vim/plugged')
+
+let g:ale_completion_enabled = 1
+" lets be brave
+Plug 'arcticicestudio/nord-vim'
+Plug 'rking/ag.vim'
+Plug 'bling/vim-airline'
+"Plug 'nanotech/jellybeans.vim'
+Plug 'itchyny/vim-gitbranch'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+Plug 'rodjek/vim-puppet'
+Plug 'airblade/vim-rooter'
+Plug 'mhinz/vim-startify'
+Plug 'jmcantrell/vim-virtualenv'
+Plug 'dense-analysis/ale'
+Plug 'https://github.com/Yggdroot/indentLine'
+call plug#end()
+
+
+" Change directory to the current buffer when opening files.
+set autochdir
+
+set laststatus=2			
+
+
+set statusline+=%{coc#status()}
+
+filetype plugin off
+filetype plugin indent on     " required!
+
+set termguicolors
+let g:nord_italic_comments = 0
+colorscheme nord
+
+let g:airline_theme = 'nord'
+let g:airline_powerline_fonts = 1
+let g:bufferline_echo = 0
+
+
+function! AirlineInit()
+  let g:airline_section_c = airline#section#create(['⎇ ','%{gitbranch#name()}'])
+endfunction
+autocmd VimEnter * call AirlineInit()
+
+au BufNewFile,BufRead *.pp set filetype=puppet
+
+
+"look for ctags
+set tags=./.tags,./.git/tags;$HOME
+
+"puppet classes
+au FileType puppet setlocal isk+=:
+
+let g:virtualenv_auto_activate = 1
+
+let g:indentLine_char = '┊'
