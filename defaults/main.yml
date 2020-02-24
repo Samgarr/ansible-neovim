@@ -26,10 +26,11 @@ python_required_packages:
     - python-pip
     - python3-dev
     - python3-pip
-    - pylint3
-    - pylint
+    - flake8
+    - python3-flake8
 
 # profile stuff
+# change $USER to you user if you need store config outside root home
 init_path: /home/$USER/.config/nvim/
 env_lines: "MYVIMRC='{{ init_path }}init.vim'\nVIMINIT='source $MYVIMRC'"
 bashrc_env: 'PATH="$PATH:/home/$USER/.local/bin"'
